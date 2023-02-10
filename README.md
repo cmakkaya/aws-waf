@@ -162,13 +162,13 @@ Control the information in page and click on Submit button and wait buildig your
 
 ## Troubleshooting
 
-If the step 3 (Building cloudformation template) fails, see failed code in "Events", you try to correct fail then run templete once again. If it keeps failing save the output logs and reach out to me on Github. 
+If the step 3 (Building cloudformation template) fails, see fail code in "Events", you try to correct fail then run templete once again. If it keeps failing save the output logs and reach out to me on Github. 
 
 ## Cleanup
 
 8. If the deployment is not needed anymore, run the following command to delete the deployment. Enter yes when prompted.
 ```
-Choose your stack and click on delete stack
+Choose your "stack", and click on "delete stack"
 ```
 
 
