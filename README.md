@@ -61,7 +61,7 @@ You can build the following environment with cloudformation template to perform 
 
 aws-waf repository root folder and terraform template folder contents are below:
 
-![picture of repository contents](./repo-picture.jpg)
+![picture of repository contents](./repopicture.jpg)
 
 user-data.sh      : If you create manually instance, to use in user-data. 
 ddostest.sh       : In order to create the test script.
