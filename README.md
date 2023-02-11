@@ -63,6 +63,11 @@ aws-waf repository root folder and terraform template folder contents are below:
 
 ![picture of repository contents](./repo-picture.jpg)
 
+user-data.sh      : If you create manually instance, to use in user-data. 
+ddostest.sh       : In order to create the test script.
+cfn-template.yaml : In order to create an environment with CloudFormation Template.
+
+
 ## Built With
 
 ![picture of environment architecture](./environment.jpg)
@@ -71,7 +76,7 @@ aws-waf repository root folder and terraform template folder contents are below:
 
 * Or build with CloudFormation
 
-This CloudFormation Template creates Application Load Balancer  with ansible loaded with Auto Scaling Group of Amazon Linux 2 (XXXXXXXXXXXXX) EC2 Instances which host Python Flask Web Application. 
+This CloudFormation Template creates Application Load Balancer with Auto Scaling Group of Amazon Linux 2 (XXXXXXXXXXXXX) EC2 Instances which host Python Flask Web Application. 
 EC2 instances are placed within WebServerSecurityGroup which allows http (80) connections only from ALBSecurityGroup, and allows tcp(3306) connections only within itself. RDS DB instance is placed within WebServerSecurityGroup so that Database Server can communicate with Web Servers. Application Load Balancer is placed within ALBSecurityGroup which allows http (80) connections from anywhere. WebServerASG Auto Scaling Group is using the WebServerLT Launch Template in order to spin up instances needed. WebServerLT Launch Template is configured to prepare Python Flask environment on EC2.
 
 

@@ -1,7 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-  CloudFormation Template creates Application Load Balancer 
-  with Auto Scaling Group of Amazon Linux 2 (XXXXXXXXXXXXX) EC2 Instances which host Python Flask Web Application. EC2 instances are placed within WebServerSecurityGroup which allows http (80) connections only from ALBSecurityGroup, and allows tcp(3306) connections only within itself. RDS DB instance is placed within WebServerSecurityGroup so that Database Server can communicate with Web Servers. Application Load Balancer is placed within ALBSecurityGroup which allows http (80) connections from anywhere. WebServerASG Auto Scaling Group is using the WebServerLT Launch Template in order to spin up instances needed. WebServerLT Launch Template is configured to prepare Python Flask environment on EC2.
+  CloudFormation Template for web Application. This template creates Application Load Balancer with Auto Scaling Group of Amazon Linux 2 (XXXXXXXXXXXXX) EC2 Instances which host Python Flask Web Application. EC2 instances are placed within WebServerSecurityGroup which allows http (80) connections only from ALBSecurityGroup, and allows tcp(3306) connections only within itself. RDS DB instance is placed within WebServerSecurityGroup so that Database Server can communicate with Web Servers. Application Load Balancer is placed within ALBSecurityGroup which allows http (80) connections from anywhere. WebServerASG Auto Scaling Group is using the WebServerLT Launch Template in order to spin up instances needed. WebServerLT Launch Template is configured to prepare Python Flask environment on EC2, and to deploy web Application on Flask Server after downloading the app code from Github repository.
 Parameters:
   MyVPC:
     Description: VPC Id of your existing account
@@ -65,8 +64,9 @@ Resources:
                 yum install python3 -y
                 pip3 install flask
                 pip3 install flask_mysql
+                echo "${MyDBURI}" > /home/ec2-user/dbserver.endpoint
                 python3 /home/ec2-user/app.py
- 
+              - MyDBURI: !GetAtt MyDatabaseServer.Endpoint.Address
   WebServerTG:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
     Properties:
@@ -113,9 +113,35 @@ Resources:
       TargetGroupARNs:
         - !Ref WebServerTG
 
+  MyDBSecurityGroup:
+    Type: AWS::RDS::DBSecurityGroup
+    Properties:
+      DBSecurityGroupIngress: # Required
+        - EC2SecurityGroupId: !GetAtt WebServerSecurityGroup.GroupId
+      GroupDescription: Back-end Database # Required
+
+  MyDatabaseServer:
+    Type: AWS::RDS::DBInstance
+    Properties: 
+      AllocatedStorage: 20
+      AllowMajorVersionUpgrade: false
+      AutoMinorVersionUpgrade: false
+      BackupRetentionPeriod: 0
+      DBInstanceClass: db.t2.micro
+      DBInstanceIdentifier: web-app-db1
+      DBName: cumhur_web
+      DBSecurityGroups: 
+        - !Ref MyDBSecurityGroup
+      Engine: MySQL
+      EngineVersion: 8.0.19
+      MasterUsername: admin
+      MasterUserPassword: cumhur_1
+      Port: 3306
+      PubliclyAccessible: true
+
 Outputs:
   WebsiteURL:
     Value: !Sub 
       - http://${ALBAddress}
       - ALBAddress: !GetAtt ApplicationLoadBalancer.DNSName
-    Description: Web Application Load Balancer URL
+    Description: web Application Load Balancer URL
