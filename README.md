@@ -23,15 +23,15 @@ Topics we will cover:
 
 5. Mitigating attacks using AWS Shield Standart
 
-5. 1. Creating Rule Groups and Rule
+    5.1. Creating Rule Groups and Rule
 
-5. 2. Creating Web ACLs
+    5.2. Creating Web ACLs
 
 6. Test to web ACL
 
-6. 1. Create a web application
+    6.1. Create a web application
 
-6. 2. Build an Application (Static Web Server, ALB, Target Group)
+    6.2. Build an Application (Static Web Server, ALB, Target Group)
 
 6. 2.1. Create an Apache Web Server with a static website at EC2 console
 
