@@ -180,11 +180,11 @@ Choose your "stack", and click on "delete stack"
 # Connect with me 📫 You can learn more about me
 
 - 🌐 [LinkedIn](https://www.linkedin.com/in/cumhurakkaya/)
+- ✏️ [Medium Articles](https://cmakkaya.medium.com/)
 - 🌐 [GitHub](https://github.com/cmakkaya/)
 - 🌐 [GitLab](https://gitlab.com/cmakkaya)
-- ✏️ [Medium Articles](https://cmakkaya.medium.com/)
 - ✏️ [Wordpress Articles](https://cloudplatformsanddevops.wordpress.com/)
-- 🏢 [Portfolio/Resume Page](https://portfolio.cmakkaya-awsdevops.link/)
+- 🏢 [Portfolio/Resume Page](https://cumhur.akkaya.link)
 - 📺 [YouTube](https://www.youtube.com/channel/UCWcRIvy70tBBfrmBocDR5hA)
 
 
